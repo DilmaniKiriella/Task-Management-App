@@ -18,7 +18,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/poppins"
-            android:text="Edit Task."
+            android:text="Edit Task"
             android:textStyle="bold"
             android:textColor="@color/green2"
             android:textSize="24sp" />
