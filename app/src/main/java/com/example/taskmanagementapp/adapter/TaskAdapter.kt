@@ -13,10 +13,10 @@ import com.example.taskmanagementapp.model.Task
 
 class TaskAdapter: RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
-    class TaskViewHolder(val itemBinding: TaskLayoutBinding): RecyclerView.ViewHolder(itemBinding.root)
+    class TaskViewHolder(val itemBinding: TaskLayoutBinding): RecyclerView.ViewHolder(itemBinding.root)//attach xml file using item binding
 
-    //DiffUtil checks if theres difference between two items
-    private val differCallback = object : DiffUtil.ItemCallback<Task>(){
+    //DiffUtil checks if theres difference between two items,use to update without refreshing the entire data set
+    private val differCallback = object : DiffUtil.ItemCallback<Task>(){//ItemCallback interface used by DiffUtil
         override fun areItemsTheSame(oldItem: Task, newItem: Task): Boolean {
             return oldItem.id == newItem.id &&
                     oldItem.taskDesc == newItem.taskDesc &&
@@ -27,10 +27,10 @@ class TaskAdapter: RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
             return oldItem == newItem
         }
     }
-    val differ = AsyncListDiffer(this, differCallback)
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
+    val differ = AsyncListDiffer(this, differCallback)//smooth ui update
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {//define the view layout(xml)
         return TaskViewHolder(
-            TaskLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            TaskLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)//inflate-create the View object hierarchy from the XML layout file specified by TaskLayoutBinding
         )
     }
 
@@ -39,7 +39,7 @@ class TaskAdapter: RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-        val currentTask = differ.currentList[position]
+        val currentTask = differ.currentList[position]//define the position of task in recycler view
 
         holder.itemBinding.noteTitle.text = currentTask.taskTitle
         holder.itemBinding.noteDesc.text = currentTask.taskDesc

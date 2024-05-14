@@ -31,6 +31,7 @@
             android:id="@+id/action_editTaskFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
 
+        <!--attaching data with the respective fragment-->
         <argument
             android:name="task"
             app:argType="com.example.taskmanagementapp.model.Task"

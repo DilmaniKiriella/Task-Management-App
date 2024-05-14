@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupViewModel(){
         val taskRepository = TaskRepository(TaskDatabase(this))
         val viewModelProviderFactory = TaskVieModelFactory(application, taskRepository)
-        taskViewModel = ViewModelProvider(this, viewModelProviderFactory)[TaskViewModel::class.java]
+        taskViewModel = ViewModelProvider(this, viewModelProviderFactory)[TaskViewModel::class.java]//specify the class of the view model needs to be retrieved
 
     }
 

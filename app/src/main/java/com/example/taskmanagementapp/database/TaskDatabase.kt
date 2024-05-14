@@ -12,19 +12,19 @@ abstract class TaskDatabase: RoomDatabase() {
     abstract fun getTaskDao(): TaskDAO
 
     companion object{
-        @Volatile   //ensures the changes are made quickly
-        private var instance: TaskDatabase? = null //variable to store data
-        private var LOCK = Any() //ensures only one instance created
+        @Volatile   //ensures the changes are made quickly(changes made in one thread appear to other thread instantly)
+        private var instance: TaskDatabase? = null //Hold the singleton instance of the taskdatabase
+        private var LOCK = Any() //ensures only one instance created(Synchronize)
 
-        operator fun invoke(context: Context) = instance?:
-        synchronized(LOCK){
+        operator fun invoke(context: Context) = instance?://for the companion obj,allows to create instance of taskdb
+        synchronized(LOCK){//instance? check if instance is already initialized,if not enters to synchronized block using lock obj
             instance ?:
             createDatabase(context).also{
                 instance = it
             }
         }
 
-        //responsible for creating database
+        //responsible for creating database instance
         private fun createDatabase(context: Context) =
             Room.databaseBuilder(
                 context.applicationContext,
